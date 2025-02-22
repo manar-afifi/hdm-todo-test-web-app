@@ -26,6 +26,33 @@ En appuyant sur le bouton, la tâche a été supprimée :
 
 ![image](https://github.com/user-attachments/assets/6ba3524e-f797-4ba0-b3c2-62d28213effe)
 
+# 📌 Frontend : Création des tâches 
+
+## 🎯 Le but
+
+L'objectif de cette implémentation est de permettre aux utilisateurs d'ajouter de nouvelles tâches à la Todo List via une interface utilisateur intuitive. L'ajout de tâche est effectué via une requête API envoyée au backend.
+
+## 📌 Ce que j'ai modifié
+
+-> Ajout d'un champ pour entrer une nouvelle tâche TextField pour permettre aux users d'entrer le nom de la tâche et bouton pour envoyer la requêtte.
+-> Utilisation d’un état pour gérer la tâche en cours d’ajout : ajout d'une variable d'état newTask gérée avec useState, afin de stocker la valeur entrée par l'utilisateur.
+
+![image](https://github.com/user-attachments/assets/05900e27-16ce-47ab-925d-cce32e1ef27b)
+
+-> Création de la fonction handleSave pour enregistrer une nouvelle tâche
+
+![image](https://github.com/user-attachments/assets/d84fa680-64bb-46af-8ef7-ecabac44ea58)
+
+ Pour Vérifier si le champ de saisie n'est pas vide et envoie une requête POST au backend (/tasks) puis il rafraîchit la liste des tâches après l'ajout.
+
+ 
+## Résultat 
+
+![image](https://github.com/user-attachments/assets/6c548fed-3652-42fa-b109-fc7488240b11)
+
+![image](https://github.com/user-attachments/assets/09fdfd02-ccdd-4849-bb3f-470b9a2d58ab)
+
+
 ## Installation
 
 ```bash
