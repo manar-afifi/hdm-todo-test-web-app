@@ -77,6 +77,37 @@ Ajout editedTasks pour stocker les modifs d'un tâche
 
 ![image](https://github.com/user-attachments/assets/396c76e0-072d-4791-8e6d-f2cc36d0b6b8)
 
+# 📌 Bonus : Implémentation du Toggle pour marquer les tâches comme complétées
+
+## 🎯 Le but
+
+L’objectif de cette fonctionnalité est de permettre aux utilisateurs de marquer une tâche comme complétée ou de la remettre en cours en cliquant sur un bouton dédié. Cette interaction est synchronisée avec le backend, assurant que l’état des tâches est bien sauvegardé.
+
+Une tâche complétée est visuellement différenciée avec un texte barré et une couleur verte, améliorant ainsi la clarté et l’expérience utilisateur.
+
+
+## 📌 Ce que j'ai modifié
+
+-> Ajout une fonction hadleToggleCompleted pour gérer le toggle :
+
+![image](https://github.com/user-attachments/assets/2b886f97-6d19-47f3-b8bc-5da31feb616e)
+
+-> Ajout d'un bouton visuel pour modifier l'état d'une tâche 
+
+![image](https://github.com/user-attachments/assets/fbe35192-6ec8-490f-844f-15201a7537bb)
+
+
+![image](https://github.com/user-attachments/assets/aafddaff-cd53-44d9-ad53-20b051a88b48)
+
+->  Modification de l'affichage des tâches complétées
+
+## Résultat 
+
+![image](https://github.com/user-attachments/assets/c5c93221-059d-447b-8f17-2f17cf251aaa)
+
+![image](https://github.com/user-attachments/assets/30168649-5011-4c16-9dce-3d11b30010c1)
+
++ changement des icônes 
 
 ## Installation
 
