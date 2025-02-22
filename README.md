@@ -52,6 +52,31 @@ L'objectif de cette implémentation est de permettre aux utilisateurs d'ajouter 
 
 ![image](https://github.com/user-attachments/assets/09fdfd02-ccdd-4849-bb3f-470b9a2d58ab)
 
+# 📌 Frontend : Modif des tâches 
+
+## 🎯 Le but
+
+L'objectif est d'implémenter la fonctionnalité permettant aux utilisateurs de modifier une tâche existante via l'interface frontend et d'envoyer cette modification au backend.
+
+## 📌 Ce que j'ai modifié
+
+-> Ajout d’un état pour suivre les modifications locales : 
+Ajout editedTasks pour stocker les modifs d'un tâche 
+
+![image](https://github.com/user-attachments/assets/6706893d-83a6-4935-adac-c53838a00b7e)
+
+-> Fonction handleUpdate : L'utilisateur peut modifier une tâche, et si le texte change, un bouton ✔ devient actif pour enregistrer la modification.
+
+-> Ajout de la logique d'affichage et de modification : Le champ de texte affiche la valeur actuelle de la tâche. Si l'utilisateur modifie le texte, il est stocké dans editedTasks. Ainsi que le bouton ✔ est activé uniquement si une modification est détectée.
+
+## Résultat 
+
+![image](https://github.com/user-attachments/assets/726e8d2f-cfa6-4283-873a-41aee65461cb)
+
+![image](https://github.com/user-attachments/assets/396aa4a7-24c1-408e-a209-a169a2a4f589)
+
+![image](https://github.com/user-attachments/assets/396c76e0-072d-4791-8e6d-f2cc36d0b6b8)
+
 
 ## Installation
 
