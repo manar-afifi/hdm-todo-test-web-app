@@ -1,4 +1,4 @@
-import { Check, Delete } from '@mui/icons-material';
+import { CheckCircleOutline, DeleteForever, Edit } from '@mui/icons-material';
 import { Box, Button, Container, IconButton, TextField, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import useFetch from '../hooks/useFetch.ts';
@@ -21,9 +21,19 @@ const TodoPage = () => {
 
   const handleSave = async () => {
     if (!newTask.trim()) return;
-
     await api.post('/tasks', { name: newTask });
     setNewTask('');
+    await handleFetchTasks();
+  };
+
+  const handleUpdate = async (id: number) => {
+    if (!editedTasks[id]?.trim()) return;
+    await api.patch(`/tasks/${id}`, { name: editedTasks[id] });
+    await handleFetchTasks();
+  };
+
+  const handleToggleCompleted = async (id: number) => {
+    await api.patch(`/tasks/${id}/toggle`, {});
     await handleFetchTasks();
   };
 
@@ -33,12 +43,6 @@ const TodoPage = () => {
     })();
   }, []);
 
-  const handleUpdate = async (id: number) => {
-    if (!editedTasks[id].trim()) return;
-    await api.patch(`/tasks/${id}`, { name: editedTasks[id] });
-    await handleFetchTasks();
-  };
-
   return (
     <Container>
       <Box display="flex" justifyContent="center" mt={5}>
@@ -47,26 +51,50 @@ const TodoPage = () => {
 
       <Box justifyContent="center" mt={5} flexDirection="column">
         {tasks.map((task) => (
-          <Box key={task.id} display="flex" justifyContent="center" alignItems="center" mt={2} gap={1} width="100%">
+          <Box
+            key={task.id}
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            mt={2}
+            gap={1}
+            width="100%"
+            sx={{
+              backgroundColor: task.completed ? '#d4edda' : 'transparent',
+              padding: 1,
+              borderRadius: 2,
+            }}
+          >
             {/* Champ modifiable */}
             <TextField
               size="small"
               value={editedTasks[task.id] ?? task.name}
               onChange={(e) => setEditedTasks({ ...editedTasks, [task.id]: e.target.value })}
               fullWidth
-              sx={{ maxWidth: 350 }}
+              sx={{
+                maxWidth: 350,
+                textDecoration: task.completed ? 'line-through' : 'none',
+                color: task.completed ? '#6c757d' : 'black',
+              }}
             />
             <Box>
+              {/* Bouton pour marquer la tâche comme complétée */}
+              <IconButton color={task.completed ? 'success' : 'primary'} onClick={() => handleToggleCompleted(task.id)}>
+                <CheckCircleOutline />
+              </IconButton>
+
               {/* Bouton de mise à jour */}
               <IconButton
                 color="success"
                 onClick={() => handleUpdate(task.id)}
                 disabled={editedTasks[task.id] === task.name}
               >
-                <Check />
+                <Edit />
               </IconButton>
+
+              {/* Bouton de suppression */}
               <IconButton color="error" onClick={() => handleDelete(task.id)}>
-                <Delete />
+                <DeleteForever />
               </IconButton>
             </Box>
           </Box>
