@@ -7,7 +7,8 @@ import { Task } from '../index';
 const TodoPage = () => {
   const api = useFetch();
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [newTask, setNewTask] = useState(''); // Utilisation de single quotes
+  const [newTask, setNewTask] = useState('');
+  const [editedTasks, setEditedTasks] = useState<{ [key: number]: string }>({});
 
   const handleFetchTasks = async () => {
     setTasks(await api.get('/tasks'));
@@ -32,6 +33,12 @@ const TodoPage = () => {
     })();
   }, []);
 
+  const handleUpdate = async (id: number) => {
+    if (!editedTasks[id].trim()) return;
+    await api.patch(`/tasks/${id}`, { name: editedTasks[id] });
+    await handleFetchTasks();
+  };
+
   return (
     <Container>
       <Box display="flex" justifyContent="center" mt={5}>
@@ -41,9 +48,21 @@ const TodoPage = () => {
       <Box justifyContent="center" mt={5} flexDirection="column">
         {tasks.map((task) => (
           <Box key={task.id} display="flex" justifyContent="center" alignItems="center" mt={2} gap={1} width="100%">
-            <TextField size="small" value={task.name} fullWidth sx={{ maxWidth: 350 }} />
+            {/* Champ modifiable */}
+            <TextField
+              size="small"
+              value={editedTasks[task.id] ?? task.name}
+              onChange={(e) => setEditedTasks({ ...editedTasks, [task.id]: e.target.value })}
+              fullWidth
+              sx={{ maxWidth: 350 }}
+            />
             <Box>
-              <IconButton color="success" disabled>
+              {/* Bouton de mise à jour */}
+              <IconButton
+                color="success"
+                onClick={() => handleUpdate(task.id)}
+                disabled={editedTasks[task.id] === task.name}
+              >
                 <Check />
               </IconButton>
               <IconButton color="error" onClick={() => handleDelete(task.id)}>
